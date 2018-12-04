@@ -14,10 +14,18 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
     "cordova-android": "^7.1.4",
+    "cordova-ios": "^4.5.5",
     "cordova-plugin-whitelist": "1",
     "firebase": "^5.6.0",
+    "node-sass": "^4.10.0",
+    "pug": "^2.0.3",
+    "sass-loader": "^7.1.0",
     "vue": "^2.5.2",
+    "vue-clock-picker": "^0.4.2",
+    "vue-functional-calendar": "^1.3.2",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
@@ -89,7 +97,8 @@
   ],
   "cordova": {
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ],
     "plugins": {
       "cordova-plugin-whitelist": {}
