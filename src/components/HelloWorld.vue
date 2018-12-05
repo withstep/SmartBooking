@@ -9,7 +9,7 @@
     </section>
     <div class="container">
       <div class="nextbtn">
-        <button type="button" class="waves-effect waves-light btn" @click="nextStep">다음</button>
+        <button type="button" class="btn" @click="nextStep">다음</button>
       </div>
     </div>
   </div>

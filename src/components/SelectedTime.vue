@@ -16,8 +16,11 @@
       </div>
     </div>
     <div class="container">
+      <div class="booking-count">{{ bookingCount }}명</div>
+    </div>
+    <div class="container">
       <div class="nextbtn">
-        <button type="button" class="waves-effect waves-light btn" @click="nextStep">다음</button>
+        <button type="button" class="btn" @click="nextStep">다음</button>
       </div>
     </div>
   </div>
@@ -25,6 +28,7 @@
 
 <script>
 import VueClockPicker from "vue-clock-picker";
+import { db } from "../main";
 export default {
   name: "SelectedTime",
   components: {
@@ -38,20 +42,45 @@ export default {
   data() {
     return {
       defaultHour: new Date().getHours(),
-      defaultMinute: new Date().getMinutes(),
+      defaultMinute: 0,
       timeSelected: false,
-      hour: new Date().getHours(),
-      minute: new Date().getMinutes()
+      selectHour: new Date().getHours(),
+      selectMinute: "00",
+      bookingMax: 5,
+      bookingCount: 0
     };
   },
   methods: {
+    getBookingCount: function() {
+      var time = [this.selectHour, this.selectMinute].join(":");
+      var vm = this;
+      db.collection("booking")
+      .where("date", "==", this.date)
+      .where("time", "==", time)
+      .get()
+      .then(function(querySnapshot) {
+        vm.bookingCount = querySnapshot.size;
+      })
+      .catch(function(error) {
+        console.log("Error getting documents: ", error);
+      })
+    },
     hourChageHandler: function(hour) {
-      this.hour = hour;
+      this.selectHour = (hour < 10 ? "0" + hour : hour);
+      this.getBookingCount();
     },
     minuteChangeHandler: function(minute) {
-      this.minute = minute;
+      this.selectMinute = (minute < 10 ? "0" + minute : minute);
+      this.getBookingCount();
     },
-    nextStep: function() {}
+    nextStep: function() {
+      var time = [this.selectHour, this.selectMinute].join(":");
+      this.$router.push({name: "Reserve", query: {date: this.date, time: time}})
+    }
+  },
+  beforeMount: function() {
+    this.selectHour = (this.selectHour < 10 ? "0" + this.selectHour : this.selectHour);
+    this.getBookingCount();
   }
 };
 </script>
@@ -61,6 +90,11 @@ export default {
   text-align: center;
   margin-top: 10px;
   font-size: 1.6em;
+}
+div.booking-count {
+  margin-top: 425px;
+  text-align: center;
+  font-size: 1.5em;
 }
 </style>
 <style>
@@ -77,5 +111,13 @@ export default {
 }
 .time-picker-modal-container {
   width: auto !important;
+}
+div.nextbtn {
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
 }
 </style>

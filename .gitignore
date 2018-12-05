@@ -1,5 +1,7 @@
 .DS_Store
-node_modules/
+node_modules/*
+!node_modules/vue-clock-picker/
+!node_modules/vue-functional-calendar/
 /dist/
 npm-debug.log*
 yarn-debug.log*

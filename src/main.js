@@ -4,7 +4,7 @@ import Vue from "vue"
 import App from "./App"
 import router from "./router"
 import firebase from "firebase/app"
-// import firestore from "firebase/firestore"
+import "firebase/firestore"
 import VueMoment from "vue-moment"
 import moment from "moment-timezone"
 import Materialize from "materialize-css"
@@ -14,13 +14,13 @@ import "vue-awesome/icons/flag"
 import "vue-awesome/icons"
 import Icon from "vue-awesome/components/Icon"
 
-Vue.component("v-icon", Icon)
 Vue.config.productionTip = false
 
 Vue.use(VueMoment, {
   moment
-});
-Vue.use(Materialize);
+})
+Vue.use(Materialize)
+Vue.component("v-icon", Icon)
 
 var config = {
   apiKey: "AIzaSyAePEgOgtLTLKKG04MpH8j4Ei8TBdOJfIs",
@@ -30,7 +30,8 @@ var config = {
   storageBucket: "smartbooking-256df.appspot.com",
   messagingSenderId: "290428983358"
 }
-firebase.initializeApp(config)
+firebase.initializeApp(config, {timestampsInSnapshots: true})
+export const db = firebase.firestore()
 
 /* eslint-disable no-new */
 new Vue({

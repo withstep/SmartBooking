@@ -30,6 +30,7 @@ module.exports = {
     }],
     'semi': 0,
     'space-before-function-paren': 0,
-    'indent': 0
+    'indent': 0,
+    'no-undef': 'off' 
   }
 }
