@@ -1,20 +1,28 @@
 <template>
-  <div class='hello'>
-    <FunctionalCalendar v-model="calendarData"
-    :configs="calendarConfigs"
-    v-on:choseDay="clickDay"
-    ></FunctionalCalendar>
+  <div class="hello">
+    <section class="section">
+      <FunctionalCalendar
+        v-model="calendarData"
+        :configs="calendarConfigs"
+        v-on:choseDay="clickDay"
+      ></FunctionalCalendar>
+    </section>
+    <div class="container">
+      <div class="nextbtn">
+        <button type="button" class="waves-effect waves-light btn" @click="nextStep">다음</button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import FunctionalCalendar from 'vue-functional-calendar'
+import FunctionalCalendar from "vue-functional-calendar";
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
   components: {
     FunctionalCalendar
   },
-  data () {
+  data() {
     return {
       calendarData: {},
       calendarConfigs: {
@@ -25,32 +33,75 @@ export default {
         calendarsCount: 1,
         changeMonthFunction: false,
         changeYearFunction: false,
-        // markDate: ['2018/10/20', '2018/10/28', '2018/10/16'],
-        // markDateMore: [{date: '2018/11/20', className: 'mark1'}, {date: '2018/11/21', className: 'mark2'}],
-        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        dayNames: ["일", "월", "화", "수", "목", "금", "토"],
+        monthNames: [
+          "1월",
+          "2월",
+          "3월",
+          "4월",
+          "5월",
+          "6월",
+          "7월",
+          "8월",
+          "9월",
+          "10월",
+          "11월",
+          "12월"
+        ],
         isModal: false,
         applyStylesheet: true
-      }
-    }
+      },
+      selectedDate: this.$moment(new Date(), "YYYY/MM/DD")
+    };
   },
   methods: {
-    clickDay: function (data) {
-      this.$router.push({name: 'SelectedTime', query: {date: data}})
+    clickDay: function(data) {
+      this.selectedDate = data;
+    },
+    nextStep: function() {
+      this.$router.push({
+        name: "SelectedTime",
+        query: {
+          date: this.$moment(this.selectedDate, "YYYY/MM/DD").format(
+            "YYYY-MM-DD"
+          )
+        }
+      });
     }
   }
-}
+};
 </script>
 
-<style>
+<style scoped>
+section.section {
+  display: flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  align-content: center;
+  justify-content: center;
+  width: 100%;
+}
+</style>
+
+<style lang="css">
 .styles-conditional-class.main-container {
   margin: 0 !important;
 }
 .styles-conditional-class .functional-calendar {
-  min-width: none !important;
+  min-width: auto !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
 }
 .styles-conditional-class .functional-calendar .calendar-for {
-  max-width: none !important;
-  min-width: none !important;
+  max-width: auto !important;
+  min-width: auto !important;
+}
+div.nextbtn {
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
 }
 </style>

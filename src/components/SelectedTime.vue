@@ -1,47 +1,81 @@
 <template>
   <div id="selected-time">
-    <vue-clock-picker
-    mode="24" :defaultHour="defaultHour"
-    :defaultMinute="defaultMinute"
-    :onTimeChange="timeChangeHandler"
-    >
-    </vue-clock-picker>
+    <div class="container">
+      <div class="row">
+        <div class="col s12 datebox">{{ date }}</div>
+        <div class="col s12">
+          <vue-clock-picker
+            mode="24"
+            :defaultHour="defaultHour"
+            :defaultMinute="defaultMinute"
+            :onHourChange="hourChageHandler"
+            :onMinuteChange="minuteChangeHandler"
+            :defaultFocused="true"
+          ></vue-clock-picker>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="nextbtn">
+        <button type="button" class="waves-effect waves-light btn" @click="nextStep">다음</button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import VueClockPicker from 'vue-clock-picker'
+import VueClockPicker from "vue-clock-picker";
 export default {
-  name: 'SelectedTime',
+  name: "SelectedTime",
   components: {
     VueClockPicker
   },
   computed: {
-    date: function () {
-      return this.$route.query.date
+    date: function() {
+      return this.$route.query.date;
     }
   },
-  data () {
+  data() {
     return {
       defaultHour: new Date().getHours(),
-      defaultMinute: new Date().getMinutes()
-    }
+      defaultMinute: new Date().getMinutes(),
+      timeSelected: false,
+      hour: new Date().getHours(),
+      minute: new Date().getMinutes()
+    };
   },
   methods: {
-    timeChangeHandler () {
-      console.log('time handler')
-    }
+    hourChageHandler: function(hour) {
+      this.hour = hour;
+    },
+    minuteChangeHandler: function(minute) {
+      this.minute = minute;
+    },
+    nextStep: function() {}
   }
-}
+};
 </script>
 
-<style>
-html, body {
-  height: 100%;
+<style lang="css" scoped>
+.datebox {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 1.6em;
 }
-#app {
-  display: flex;
-  margin-top: 50px;
-  justify-content: center;
+</style>
+<style>
+.time-picker-preview {
+  display: none;
+}
+.interval-container {
+  text-align: center;
+}
+.outside-click-container {
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.time-picker-modal-container {
+  width: auto !important;
 }
 </style>
