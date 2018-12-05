@@ -75,7 +75,7 @@ export default {
     },
     nextStep: function() {
       if (this.bookingCount > this.bookingMax) {
-        M.toast({html: "선택하신 시간에는 " + this.bookingMax + "명이상으로 예약 하실 수 없습니다."});
+        M.toast({html: "선택하신 시간에는 " + this.bookingMax + "명이상 예약 하실 수 없습니다."});
       } else {
         var time = [this.selectHour, this.selectMinute].join(":");
         this.$router.push({name: "Reserve", query: {date: this.date, time: time}})
