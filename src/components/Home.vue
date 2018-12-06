@@ -19,7 +19,7 @@
 <script>
 import FunctionalCalendar from "vue-functional-calendar";
 export default {
-  name: "HelloWorld",
+  name: "Home",
   components: {
     FunctionalCalendar
   },

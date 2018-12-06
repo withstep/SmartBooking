@@ -79,19 +79,3 @@ div.booking-count {
   font-size: 1.5em;
 }
 </style>
-<style>
-.time-picker-preview {
-  display: none;
-}
-.interval-container {
-  text-align: center;
-}
-.outside-click-container {
-  left: 0;
-  right: 0;
-  margin: auto;
-}
-.time-picker-modal-container {
-  width: auto !important;
-}
-</style>

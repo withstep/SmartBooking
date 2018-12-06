@@ -40,7 +40,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="css">
 .fade-enter-active,
 .fade-leave-active {
   transition-duration: 0.3s;
@@ -51,6 +51,22 @@ export default {
 .fade-enter,
 .fade-leave-active {
   opacity: 0;
+}
+
+.time-picker-preview {
+  display: none;
+}
+.interval-container {
+  text-align: center;
+  font-size: 1.1em;
+}
+.outside-click-container {
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.time-picker-modal-container {
+  width: auto !important;
 }
 
 p.description {

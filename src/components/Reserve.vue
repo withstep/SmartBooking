@@ -115,10 +115,10 @@ export default {
           var datetime = vm
             .$moment(vm.date + " " + vm.time)
             .format("YYYY년 MM월 DD일 HH시 mm분");
+          vm.isSubmit = false;
           M.toast({
             html: datetime + " 예약접수 완료",
             completeCallback: function() {
-              vm.isSubmit = false;
               vm.$router.push("/");
             }
           });
