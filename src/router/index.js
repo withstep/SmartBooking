@@ -1,7 +1,8 @@
 import Vue from "vue"
 import Router from "vue-router"
 import HelloWorld from "@/components/HelloWorld"
-import SelectedTime from "@/components/SelectedTime"
+import SelectedHour from "@/components/SelectedHour"
+import SelectedMinute from "@/components/SelectedMinute"
 import Reserve from "@/components/Reserve"
 
 Vue.use(Router)
@@ -13,9 +14,14 @@ export default new Router({
       component: HelloWorld
     },
     {
-      path: "/selected-time",
-      name: "SelectedTime",
-      component: SelectedTime
+      path: "/selected-hour",
+      name: "SelectedHour",
+      component: SelectedHour
+    },
+    {
+      path: "/selected-minute",
+      name: "SelectedMinute",
+      component: SelectedMinute
     },
     {
       path: "/reserve",

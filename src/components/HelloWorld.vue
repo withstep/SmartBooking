@@ -1,12 +1,13 @@
 <template>
   <div class="hello">
-    <section class="section">
+    <p class="description center">예약 날짜를 선택해 주세요.</p>
+    <div class="container">
       <FunctionalCalendar
         v-model="calendarData"
         :configs="calendarConfigs"
         v-on:choseDay="clickDay"
       ></FunctionalCalendar>
-    </section>
+    </div>
     <div class="container">
       <div class="nextbtn">
         <button type="button" class="btn" @click="nextStep">다음</button>
@@ -26,7 +27,7 @@ export default {
     return {
       calendarData: {},
       calendarConfigs: {
-        sundayStart: false,
+        sundayStart: true,
         isDatePicker: true,
         isDateRange: false,
         isMultiple: false,
@@ -59,28 +60,28 @@ export default {
       this.selectedDate = data;
     },
     nextStep: function() {
-      this.$router.push({
-        name: "SelectedTime",
-        query: {
-          date: this.$moment(this.selectedDate, "YYYY/MM/DD").format(
-            "YYYY-MM-DD"
-          )
-        }
-      });
+      var date = this.$moment(this.selectedDate, "YYYY/MM/DD").format(
+        "YYYY-MM-DD"
+      );
+      if (
+        confirm(
+          this.$moment(date).format("YYYY년 MM월 DD일") +
+            " 예약을 선택하셨습니다.\n다음으로 계속 진행하시겠습니까?"
+        )
+      ) {
+        this.$router.push({
+          name: "SelectedHour",
+          query: {
+            date: date
+          }
+        });
+      }
     }
   }
 };
 </script>
 
 <style scoped>
-section.section {
-  display: flex;
-  display: -webkit-flex;
-  display: -ms-flex;
-  align-content: center;
-  justify-content: center;
-  width: 100%;
-}
 </style>
 
 <style lang="css">
@@ -95,13 +96,5 @@ section.section {
 .styles-conditional-class .functional-calendar .calendar-for {
   max-width: auto !important;
   min-width: auto !important;
-}
-div.nextbtn {
-  position: fixed;
-  bottom: 30px;
-  left: 0;
-  right: 0;
-  margin: auto;
-  text-align: center;
 }
 </style>
