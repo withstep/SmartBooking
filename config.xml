@@ -24,7 +24,7 @@
     </platform>
     <preference name="orientation" value="portrait" />
     <preference name="target-device" value="universal" />
-    <preference name="fullscreen" value="true" />
+    <preference name="fullscreen" value="false" />
     <allow-navigation href="*" />
     <preference name="stay-in-webview" value="true" />
     <feature name="StatusBar">
